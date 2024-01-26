@@ -8,26 +8,29 @@ public class MG01_PedestriansSpawner : MonoBehaviour
     [SerializeField] List<GameObject> Pedestrians = new List<GameObject>();
     [SerializeField] List<Vector3> SpawnerPositions = new List<Vector3>();
     [Header("LevelSetup")]
-    [SerializeField] float TimeForLevel;
+    [SerializeField] LevelTimer levelTimer;
 
     int lastSpawner = -1;
-
     float lastTimerLimit = 3f; //should change it after event call
+    bool shouldSpawnPedestrians = true;
 
-    private bool shouldSpawnPedestrians = true;
+    void OnEnable() => levelTimer.OnTimerIsOver += TimerIsOver;
+    void OnDisable() => levelTimer.OnTimerIsOver -= TimerIsOver;
 
     void Start()
     {
-        StartCoroutine(PedestriansSpawner());
+        //StartCoroutine(PedestriansSpawner());
         StartCoroutine(InstantiatePedestrian());
     }
 
-    IEnumerator PedestriansSpawner()
-    {
-        shouldSpawnPedestrians = true;
-        yield return new WaitForSeconds(TimeForLevel);
-        shouldSpawnPedestrians = false;
-    }
+    //IEnumerator PedestriansSpawner()
+    //{
+    //    shouldSpawnPedestrians = true;
+    //    yield return new WaitForSeconds(TimeForLevel);
+    //    shouldSpawnPedestrians = false;
+    //}
+
+    void TimerIsOver() => shouldSpawnPedestrians = false;
 
     IEnumerator InstantiatePedestrian()
     {
