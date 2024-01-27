@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class MG02_PedestrianMovement : MonoBehaviour
 {
-    Vector2 startPosition;
-    Vector2 endPosition;
-    float desiredDuration;
+    [SerializeField] Vector2 startPosition;
+    [SerializeField] float desiredDuration;
+    [SerializeField] float lerpDistance;
+    
     float elapsedTime;
-    float lerpDistance;
+    Vector2 endPosition;
 
     void Start()
     {
@@ -19,5 +20,6 @@ public class MG02_PedestrianMovement : MonoBehaviour
         elapsedTime += Time.fixedDeltaTime;
         float lerpComplete = elapsedTime / desiredDuration;
         transform.position = Vector2.Lerp(startPosition, endPosition, lerpComplete);
+        if (transform.position == new Vector3(endPosition.x, endPosition.y, 0)) Destroy(this.gameObject); 
     }
 }

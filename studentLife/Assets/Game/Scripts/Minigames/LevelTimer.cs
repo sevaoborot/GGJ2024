@@ -8,10 +8,7 @@ public class LevelTimer : MonoBehaviour
 
     public Action OnTimerIsOver;
 
-    void Start()
-    {
-        StartCoroutine(Timer()); 
-    }
+    void Start() => StartCoroutine(Timer());
 
     IEnumerator Timer()
     {

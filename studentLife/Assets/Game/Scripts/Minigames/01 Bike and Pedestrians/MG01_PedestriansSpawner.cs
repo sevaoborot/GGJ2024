@@ -7,7 +7,7 @@ public class MG01_PedestriansSpawner : MonoBehaviour
     [Header("Spawning Setup")]
     [SerializeField] List<GameObject> Pedestrians = new List<GameObject>();
     [SerializeField] List<Vector3> SpawnerPositions = new List<Vector3>();
-    [Header("LevelSetup")]
+    [Header("Level Setup")]
     [SerializeField] LevelTimer levelTimer;
 
     int lastSpawner = -1;
@@ -19,24 +19,16 @@ public class MG01_PedestriansSpawner : MonoBehaviour
 
     void Start()
     {
-        //StartCoroutine(PedestriansSpawner());
-        StartCoroutine(InstantiatePedestrian());
+        StartCoroutine(InstantiatePedestrians());
     }
-
-    //IEnumerator PedestriansSpawner()
-    //{
-    //    shouldSpawnPedestrians = true;
-    //    yield return new WaitForSeconds(TimeForLevel);
-    //    shouldSpawnPedestrians = false;
-    //}
 
     void TimerIsOver() => shouldSpawnPedestrians = false;
 
-    IEnumerator InstantiatePedestrian()
+    IEnumerator InstantiatePedestrians()
     {
         while (shouldSpawnPedestrians)
         {
-            Instantiate(Pedestrians[Random.Range(0, Pedestrians.Count - 1)], SpawnerPositions[CheckIfLastSpawner()], Quaternion.identity);
+            Instantiate(Pedestrians[Random.Range(0, Pedestrians.Count - 1)], SpawnerPositions[CheckIfLastSpawner()], Quaternion.Euler(0, 0, 90f));
             yield return new WaitForSeconds(Random.Range(0.5f, lastTimerLimit));
         }
     }
@@ -47,7 +39,7 @@ public class MG01_PedestriansSpawner : MonoBehaviour
         do
         {
             temp = Random.Range(0, SpawnerPositions.Count - 1);
-        } while (temp != lastSpawner);
+        } while (temp == lastSpawner);
         lastSpawner = temp;
         return temp;
     }
