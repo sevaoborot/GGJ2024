@@ -89,8 +89,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3dfe6528-d05b-4b8f-9be1-0e6912c473da"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""Hold(duration=0.1,pressPoint=0.25)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Cheat"",

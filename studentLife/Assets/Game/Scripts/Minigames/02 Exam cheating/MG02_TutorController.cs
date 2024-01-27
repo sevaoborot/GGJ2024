@@ -9,8 +9,7 @@ public class MG02_TutorController : MonoBehaviour
 
     SpriteRenderer colorGreybox;
     bool shouldCheckForCheating = true;
-    int maxNumberOfPausesInARaw = 4;
-    int currentNumberOfPausesInARaw = 0;
+    bool isChecking = true;
 
     private void OnEnable() => levelTimer.OnTimerIsOver += TimerIsOver;
     private void OnDisable() => levelTimer.OnTimerIsOver -= TimerIsOver;
@@ -25,28 +24,25 @@ public class MG02_TutorController : MonoBehaviour
     void Start()
     {
         colorGreybox = GetComponent<SpriteRenderer>();
+        StartCoroutine(TutorTimer());
     }
 
-    void Update()
+    IEnumerator TutorTimer()
     {
-        if (shouldCheckForCheating) {
-            int temp = Random.Range(0, 1); //i guess smth with the random
-            Debug.Log(temp);
-            if (temp == 0 && currentNumberOfPausesInARaw < maxNumberOfPausesInARaw) StartCoroutine(PausesTimer());
-            if (temp == 1) StartCoroutine(DetectionTime());
+        while (shouldCheckForCheating)
+        {
+            int temp = Random.Range(minInclusive: 0, maxExclusive: 2);
+            if (temp==0)
+            {
+                colorGreybox.color = Color.white;
+                yield return new WaitForSeconds(1f);
+            }
+            if (temp == 1)
+            {
+                colorGreybox.color = Color.red;
+                yield return new WaitForSeconds(Random.Range(0.75f, TimeToDetectCheating));
+                colorGreybox.color = Color.white;
+            }
         }
-    }
-
-    IEnumerator PausesTimer()
-    {
-        yield return new WaitForSeconds(0.5f);
-        currentNumberOfPausesInARaw++;
-    }
-
-    IEnumerator DetectionTime()
-    {
-        colorGreybox.color = Color.red;
-        yield return new WaitForSeconds(Random.Range(0.75f, TimeToDetectCheating));
-        colorGreybox.color = Color.white;
     }
 }

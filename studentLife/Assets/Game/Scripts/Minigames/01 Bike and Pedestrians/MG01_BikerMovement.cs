@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class MG01_BikerMovement : MonoBehaviour, GameInput.IMinigame01Actions
 {
