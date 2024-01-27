@@ -70,6 +70,34 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Minigame02"",
+            ""id"": ""cc1f1492-bd8c-4163-9bbc-049cc38c9723"",
+            ""actions"": [
+                {
+                    ""name"": ""Cheat"",
+                    ""type"": ""Button"",
+                    ""id"": ""dedc5e82-c3f9-4eb1-bea2-34f5df60647e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""3dfe6528-d05b-4b8f-9be1-0e6912c473da"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cheat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -78,6 +106,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Minigame01 = asset.FindActionMap("Minigame01", throwIfNotFound: true);
         m_Minigame01_Up = m_Minigame01.FindAction("Up", throwIfNotFound: true);
         m_Minigame01_Down = m_Minigame01.FindAction("Down", throwIfNotFound: true);
+        // Minigame02
+        m_Minigame02 = asset.FindActionMap("Minigame02", throwIfNotFound: true);
+        m_Minigame02_Cheat = m_Minigame02.FindAction("Cheat", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -189,9 +220,59 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         }
     }
     public Minigame01Actions @Minigame01 => new Minigame01Actions(this);
+
+    // Minigame02
+    private readonly InputActionMap m_Minigame02;
+    private List<IMinigame02Actions> m_Minigame02ActionsCallbackInterfaces = new List<IMinigame02Actions>();
+    private readonly InputAction m_Minigame02_Cheat;
+    public struct Minigame02Actions
+    {
+        private @GameInput m_Wrapper;
+        public Minigame02Actions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Cheat => m_Wrapper.m_Minigame02_Cheat;
+        public InputActionMap Get() { return m_Wrapper.m_Minigame02; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(Minigame02Actions set) { return set.Get(); }
+        public void AddCallbacks(IMinigame02Actions instance)
+        {
+            if (instance == null || m_Wrapper.m_Minigame02ActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_Minigame02ActionsCallbackInterfaces.Add(instance);
+            @Cheat.started += instance.OnCheat;
+            @Cheat.performed += instance.OnCheat;
+            @Cheat.canceled += instance.OnCheat;
+        }
+
+        private void UnregisterCallbacks(IMinigame02Actions instance)
+        {
+            @Cheat.started -= instance.OnCheat;
+            @Cheat.performed -= instance.OnCheat;
+            @Cheat.canceled -= instance.OnCheat;
+        }
+
+        public void RemoveCallbacks(IMinigame02Actions instance)
+        {
+            if (m_Wrapper.m_Minigame02ActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IMinigame02Actions instance)
+        {
+            foreach (var item in m_Wrapper.m_Minigame02ActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_Minigame02ActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public Minigame02Actions @Minigame02 => new Minigame02Actions(this);
     public interface IMinigame01Actions
     {
         void OnUp(InputAction.CallbackContext context);
         void OnDown(InputAction.CallbackContext context);
+    }
+    public interface IMinigame02Actions
+    {
+        void OnCheat(InputAction.CallbackContext context);
     }
 }

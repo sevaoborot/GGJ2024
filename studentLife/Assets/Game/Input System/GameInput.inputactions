@@ -48,6 +48,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Minigame02",
+            "id": "cc1f1492-bd8c-4163-9bbc-049cc38c9723",
+            "actions": [
+                {
+                    "name": "Cheat",
+                    "type": "Button",
+                    "id": "dedc5e82-c3f9-4eb1-bea2-34f5df60647e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3dfe6528-d05b-4b8f-9be1-0e6912c473da",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cheat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
