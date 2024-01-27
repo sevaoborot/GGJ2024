@@ -1,12 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public static class SceneControllerScript
+public class SceneControllerScript: MonoBehaviour
 {
-    private static int numberOfLevels;
+    public static SceneControllerScript instance;
 
-    public static Action OnLevelLoad;
-    public static Action OnLevelEnd;
+    private void Awake()
+    {
+        if (instance != null) Destroy(gameObject);
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 }

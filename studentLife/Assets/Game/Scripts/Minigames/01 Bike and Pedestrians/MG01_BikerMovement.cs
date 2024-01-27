@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class MG01_BikerMovement : MonoBehaviour, GameInput.IMinigame01Actions
 {
@@ -25,6 +26,11 @@ public class MG01_BikerMovement : MonoBehaviour, GameInput.IMinigame01Actions
     {
         currentPosition = 1;
         transform.position = BikerPositions[1];
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Crash!");
     }
 
     public void OnDown(InputAction.CallbackContext context)
