@@ -1,1 +1,54 @@
-{}
+{
+    "name": "GameInput",
+    "maps": [
+        {
+            "name": "Minigame01",
+            "id": "81093547-ce8f-4be8-a698-f613b00f623e",
+            "actions": [
+                {
+                    "name": "Up",
+                    "type": "Button",
+                    "id": "bd4429c1-0518-4122-b546-75437e47da0e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Down",
+                    "type": "Button",
+                    "id": "68e46d92-dedb-4b67-a5d1-ba5e1b6c43d7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "14417834-6ff6-46e7-8197-bbe81b75aafd",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f95adf02-25f0-4b41-a5a8-e2096ef4699d",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
