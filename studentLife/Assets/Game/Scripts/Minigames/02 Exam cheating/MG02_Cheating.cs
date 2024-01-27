@@ -4,8 +4,10 @@ using UnityEngine.InputSystem;
 
 public class MG02_Cheating : MonoBehaviour, GameInput.IMinigame02Actions
 {
+    [Header("Cheating stats")]
     [SerializeField] float FullCheatMaxTime;
     [SerializeField] float MaxCheatValue;
+    [Header("Necessary refs")]
     [SerializeField] MG02_TutorController TutorController;
     [SerializeField] LevelTimer LevelTimer;
 

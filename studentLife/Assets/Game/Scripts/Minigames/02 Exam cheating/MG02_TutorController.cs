@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 public class MG02_TutorController : MonoBehaviour
 {
     [SerializeField] float TimeToDetectCheating;
-    [SerializeField] float TimepieceNotToDetectCheating;
     [SerializeField] LevelTimer levelTimer;
 
     public Action OnCheckingOn;
