@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MG02_PedestrianMovement : MonoBehaviour
+public class MG01_PedestrianMovement : MonoBehaviour
 {
     [SerializeField] Vector2 startPosition;
     [SerializeField] float desiredDuration;
