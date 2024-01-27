@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,12 +6,16 @@ public class MG02_Cheating : MonoBehaviour, GameInput.IMinigame02Actions
 {
     [SerializeField] float FullCheatMaxTime;
     [SerializeField] float MaxCheatValue;
+    [SerializeField] MG02_TutorController TutorController;
+    [SerializeField] LevelTimer LevelTimer;
 
     GameInput gameInput;
     SpriteRenderer colorGreybox;
 
     bool isHeld;
-    float currentCheatValue;
+    bool isCheatingOn = false;
+    bool shouldCheat = true;
+    [SerializeField]float currentCheatValue;
 
     private void OnEnable()
     {
@@ -20,17 +25,39 @@ public class MG02_Cheating : MonoBehaviour, GameInput.IMinigame02Actions
             gameInput.Minigame02.SetCallbacks(this);
         }
         gameInput.Minigame02.Enable();
+
+        TutorController.OnCheckingOn += CheatingOff;
+        TutorController.OnCheckingOff += CheatingOn;
+        LevelTimer.OnTimerIsOver += TimerIsOver;
     }
 
-    private void OnDisable() => gameInput.Minigame02.Disable();
+    private void OnDisable()
+    {
+        gameInput.Minigame02.Disable();
 
-    void Start() => colorGreybox = GetComponent<SpriteRenderer>();
+        TutorController.OnCheckingOn -= CheatingOff;
+        TutorController.OnCheckingOff -= CheatingOn;
+        LevelTimer.OnTimerIsOver -= TimerIsOver;
+    } 
+
+    void Start()
+    {
+        colorGreybox = GetComponent<SpriteRenderer>();
+    }
 
     void Update()
     {
-        if (isHeld) currentCheatValue += CalculatePercentOfCheating(Time.deltaTime);
-        if (currentCheatValue >= MaxCheatValue) Debug.Log("Cheat SUCCESS!!!");
+        if (shouldCheat)
+        {
+            if (isHeld && isCheatingOn) currentCheatValue += CalculatePercentOfCheating(Time.deltaTime);
+            else if (isHeld && !isCheatingOn) Debug.LogWarning("LOOSER!!!");
+            if (currentCheatValue >= MaxCheatValue) Debug.Log("Cheat SUCCESS!!!");
+        }
     }
+
+    void CheatingOn() => isCheatingOn = true;
+    void CheatingOff() => isCheatingOn = false;
+    void TimerIsOver() => shouldCheat = false;
 
     public void OnCheat(InputAction.CallbackContext context)
     {

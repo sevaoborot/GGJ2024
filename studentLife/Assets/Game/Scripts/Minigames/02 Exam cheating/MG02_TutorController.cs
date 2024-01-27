@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MG02_TutorController : MonoBehaviour
 {
@@ -7,9 +9,11 @@ public class MG02_TutorController : MonoBehaviour
     [SerializeField] float TimepieceNotToDetectCheating;
     [SerializeField] LevelTimer levelTimer;
 
+    public Action OnCheckingOn;
+    public Action OnCheckingOff;
+
     SpriteRenderer colorGreybox;
     bool shouldCheckForCheating = true;
-    bool isChecking = true;
 
     private void OnEnable() => levelTimer.OnTimerIsOver += TimerIsOver;
     private void OnDisable() => levelTimer.OnTimerIsOver -= TimerIsOver;
@@ -35,11 +39,14 @@ public class MG02_TutorController : MonoBehaviour
             if (temp==0)
             {
                 colorGreybox.color = Color.white;
+                OnCheckingOff?.Invoke();
                 yield return new WaitForSeconds(1f);
             }
             if (temp == 1)
             {
                 colorGreybox.color = Color.red;
+                yield return new WaitForSeconds(0.5f); //like a small time for reaction
+                OnCheckingOn?.Invoke();
                 yield return new WaitForSeconds(Random.Range(0.75f, TimeToDetectCheating));
                 colorGreybox.color = Color.white;
             }
