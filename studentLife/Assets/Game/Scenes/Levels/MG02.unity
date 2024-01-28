@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87860466933617c40bebe9d9f76c8608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultResolution: {x: 2560, y: 1440}
+  DefaultResolution: {x: 1280, y: 720}
   WidthOrHeight: 0
 --- !u!114 &1091369863
 MonoBehaviour:
@@ -558,7 +558,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeToDetectCheating: 2.5
-  TimepieceNotToDetectCheating: 0.5
   levelTimer: {fileID: 1899963912}
 --- !u!114 &1899963912
 MonoBehaviour:

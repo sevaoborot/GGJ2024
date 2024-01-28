@@ -154,12 +154,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Pedestrians:
-  - {fileID: 2999255620530973402, guid: e676e15290895e74cbd09b98694cbb54, type: 3}
+  - {fileID: 1330832811639489316, guid: a9c47d73136a9fa43b0b8e997f783902, type: 3}
+  - {fileID: 1330832811639489316, guid: 2ec9b7e4d8130e44083d6e479481c1c2, type: 3}
+  - {fileID: 1330832811639489316, guid: 20ff7d1a7ca2c2e4eb4f025d21183bcd, type: 3}
   SpawnerPositions:
   - {x: 25, y: 5, z: 0}
   - {x: 25, y: 0, z: 0}
   - {x: 25, y: -5, z: 0}
   levelTimer: {fileID: 361027276}
+  SuccessPic: {fileID: 4997758758695441152, guid: 5299edd1d2992ae49ab1957eef648eb8, type: 3}
 --- !u!4 &361027275
 Transform:
   m_ObjectHideFlags: 0
@@ -187,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a1a17806f6e409488f5c971473fef33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelLifetime: 5
+  LevelLifetime: 10
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +273,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -338,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87860466933617c40bebe9d9f76c8608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultResolution: {x: 2560, y: 1440}
+  DefaultResolution: {x: 1280, y: 720}
   WidthOrHeight: 0
 --- !u!1 &579499730
 GameObject:
@@ -476,9 +479,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6352146846259448418}
   - component: {fileID: 8013145656840338093}
-  - component: {fileID: 8013145656840338092}
-  - component: {fileID: 8013145656840338091}
+  - component: {fileID: 8013145656840338095}
   - component: {fileID: 8013145656840338090}
+  - component: {fileID: 8013145656840338091}
+  - component: {fileID: 8013145656840338094}
   m_Layer: 0
   m_Name: Biker
   m_TagString: Untagged
@@ -494,13 +498,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2999255620835959365}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -17, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8013145656840338090
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -542,8 +546,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0, g: 0.7075472, b: 0.12315624, a: 1}
+  m_Sprite: {fileID: -1213341176, guid: c13781eda4ab6c84ab72659f32b78421, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -580,8 +584,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &8013145656840338092
-CapsuleCollider2D:
+--- !u!114 &8013145656840338093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2999255620835959365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45a1a26ad5f8b574da4c8de2e3dd07b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BikerPositions:
+  - {x: -12, y: -5, z: 0}
+  - {x: -12, y: 0, z: 0}
+  - {x: -12, y: 5, z: 0}
+  levelTimer: {fileID: 361027273}
+  LosingPics:
+  - {fileID: 4749109163085760445, guid: a9c9bdc705362044ead2e0eb252afd9f, type: 3}
+  - {fileID: 4749109163085760445, guid: 2e0a242e06b8daa4f8b2fb0e8359b5de, type: 3}
+  - {fileID: 4749109163085760445, guid: 695b6384f997baf4790a8bcadd84c067, type: 3}
+--- !u!61 &8013145656840338094
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -613,24 +638,39 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.0000002, y: 2.0000005}
-  m_Direction: 0
---- !u!114 &8013145656840338093
-MonoBehaviour:
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3, y: 2.8}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3, y: 2.8}
+  m_EdgeRadius: 0
+--- !u!95 &8013145656840338095
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2999255620835959365}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45a1a26ad5f8b574da4c8de2e3dd07b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BikerPositions:
-  - {x: -12, y: -5, z: 0}
-  - {x: -12, y: 0, z: 0}
-  - {x: -12, y: 5, z: 0}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 13875e4737a229f4e9566970944a61d5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

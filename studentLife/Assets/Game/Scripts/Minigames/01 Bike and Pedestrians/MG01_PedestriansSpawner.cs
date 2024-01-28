@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MG01_PedestriansSpawner : MonoBehaviour
 {
@@ -9,9 +10,11 @@ public class MG01_PedestriansSpawner : MonoBehaviour
     [SerializeField] List<Vector3> SpawnerPositions = new List<Vector3>();
     [Header("Level Setup")]
     [SerializeField] LevelTimer levelTimer;
+    [Header("LevelSuccess")]
+    [SerializeField] GameObject SuccessPic;
 
     int lastSpawner = -1;
-    float lastTimerLimit = 3f; //should change it after event call
+    float lastTimerLimit = 2f; //should change it after event call
     bool shouldSpawnPedestrians = true;
 
     void OnEnable() => levelTimer.OnTimerIsOver += TimerIsOver;
@@ -22,25 +25,25 @@ public class MG01_PedestriansSpawner : MonoBehaviour
         StartCoroutine(InstantiatePedestrians());
     }
 
-    void TimerIsOver() => shouldSpawnPedestrians = false;
+    void TimerIsOver()
+    {
+        shouldSpawnPedestrians = false;
+        StartCoroutine(LevelSuccess());
+    }
 
     IEnumerator InstantiatePedestrians()
     {
         while (shouldSpawnPedestrians)
         {
-            Instantiate(Pedestrians[Random.Range(0, Pedestrians.Count - 1)], SpawnerPositions[CheckIfLastSpawner()], Quaternion.Euler(0, 0, 90f));
-            yield return new WaitForSeconds(Random.Range(0.5f, lastTimerLimit));
+            Instantiate(Pedestrians[Random.Range(0, Pedestrians.Count)], SpawnerPositions[Random.Range(0, SpawnerPositions.Count)], Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(0.3f, lastTimerLimit));
         }
     }
 
-    int CheckIfLastSpawner()
+    IEnumerator LevelSuccess()
     {
-        int temp;
-        do
-        {
-            temp = Random.Range(0, SpawnerPositions.Count - 1);
-        } while (temp == lastSpawner);
-        lastSpawner = temp;
-        return temp;
+        Instantiate(SuccessPic, Vector3.zero, Quaternion.identity);
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene(1);
     }
 }

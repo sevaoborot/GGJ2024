@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Game/Scenes/MG01.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Game/Scenes/UI/Menu.unity
+    guid: b4fd7ce4f464b8447847e6fb5c1cfae5
   - enabled: 1
-    path: Assets/Game/Scenes/MG02.unity
-    guid: 7516484ed1dd49b43ad38c2809eb9925
+    path: Assets/Game/Scenes/UI/LifesLeft.unity
+    guid: 4e3f465bd49b66c4e8bd0d665bdef100
+  - enabled: 1
+    path: Assets/Game/Scenes/Levels/MG01.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
   m_configObjects: {}

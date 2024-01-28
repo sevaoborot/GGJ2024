@@ -1,16 +1,25 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class MG01_BikerMovement : MonoBehaviour, GameInput.IMinigame01Actions
 {
+    [Header("Biker Setup")]
     [SerializeField] List<Vector3> BikerPositions = new List<Vector3>();
+    [SerializeField] GameObject levelTimer;
+    [Header("Lose screen")]
+    [SerializeField] List<GameObject> LosingPics = new List<GameObject>();
 
     GameInput gameInput;
     int currentPosition;
 
+    GameObject LifesCounter;
+
     private void OnEnable()
     {
+        LifesCounter = GameObject.Find("LevelController");
         if (gameInput == null)
         {
             gameInput = new GameInput();
@@ -29,7 +38,8 @@ public class MG01_BikerMovement : MonoBehaviour, GameInput.IMinigame01Actions
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Crash!");
+        levelTimer.GetComponent<LevelTimer>().enabled = false;
+        StartCoroutine(FailPics());
     }
 
     public void OnDown(InputAction.CallbackContext context)
@@ -48,5 +58,17 @@ public class MG01_BikerMovement : MonoBehaviour, GameInput.IMinigame01Actions
             currentPosition++;
             transform.position = BikerPositions[currentPosition];
         }
+    }
+
+    IEnumerator FailPics()
+    {
+        Instantiate(LosingPics[0], Vector3.zero, Quaternion.identity);
+        yield return new WaitForSeconds(0.5f);
+        Instantiate(LosingPics[1], Vector3.zero, Quaternion.identity);
+        yield return new WaitForSeconds(1f);
+        Instantiate(LosingPics[2], Vector3.zero, Quaternion.identity);
+        yield return new WaitForSeconds(2f);
+        LifesCounter.GetComponent<SceneControllerScript>().lifesNumber--;
+        SceneManager.LoadScene(1);
     }
 }
